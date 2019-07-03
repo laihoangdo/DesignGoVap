@@ -1,7 +1,7 @@
 <!-- http://demo.themewagon.com/preview/free-bootstrap-4-html5-news-website-template-magnews2 -->
 <!-- http://demo.themewagon.com/preview/free-bootstrap-4-html5-news-website-template-magnews2 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
 <head>
 	<title>Home 01</title>
 	<meta charset="UTF-8">
@@ -25,8 +25,32 @@
 <!--===============================================================================================-->	
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsforce/1.9.1/jsforce.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular-route.min.js"></script>
+
+<script>
+	jsforce.browser.init({
+	clientId: '3MVG9YDQS5WtC11rsEcD8WGomjmSZN9rYit_wSCYFHaTEPNEYB4SEtL1FBThZEB1ZbM0PIbZcJ_8C68SygkYs',
+	redirectUri: 'https://login.salesforce.com/services/oauth2/success'
+	});
+	jsforce.browser.on('connect', function(conn) {
+		console.log('cccccccccccccccccccccccccccc');
+	conn.query('SELECT Id, Name FROM Account', function(err, res) {
+	if (err) { return console.error(err); }
+	console.log(res);
+	});
+	});
+</script>
 </head>
-<body class="animsition">
+<body class="animsition" ng-controller="myCtrl" ng-init="init()">
+		<button onclick="javascript:jsforce.browser.login();">Login</button>
+		<a href="#!red">Red</a>
+						<a href="#!green">Green</a>
+						<a href="#!blue">Blue</a>
+						
+						<div ng-view></div>
 	
 	<!-- Header -->
 	<header>
@@ -35,23 +59,11 @@
 			<div class="topbar">
 				<div class="content-topbar container h-100">
 					<div class="left-topbar">
-						<span class="left-topbar-item flex-wr-s-c">
-							<span>
-								New York, NY
-							</span>
-
-							<img class="m-b-1 m-rl-8" src="images/icons/icon-night.png" alt="IMG">
-
-							<span>
-								HI 58° LO 56°
-							</span>
-						</span>
-
-						<a href="#" class="left-topbar-item">
-							About
+						<a ng-repeat="m in menuList" href="#" class="left-topbar-item">
+							{{m}}
 						</a>
 
-						<a href="#" class="left-topbar-item">
+						<!-- <a href="#" class="left-topbar-item">
 							Contact
 						</a>
 
@@ -61,7 +73,7 @@
 
 						<a href="#" class="left-topbar-item">
 							Log in
-						</a>
+						</a> -->
 					</div>
 
 					<div class="right-topbar">
@@ -163,8 +175,8 @@
 
 				<ul class="main-menu-m">
 					<li>
-						<a href="index.html">Home</a>
-						<ul class="sub-menu-m">
+						<a href="index.html">Trang chủ</a>
+						<!-- <ul class="sub-menu-m">
 							<li><a href="index.html">Homepage v1</a></li>
 							<li><a href="home-02.html">Homepage v2</a></li>
 							<li><a href="home-03.html">Homepage v3</a></li>
@@ -172,31 +184,31 @@
 
 						<span class="arrow-main-menu-m">
 							<i class="fa fa-angle-right" aria-hidden="true"></i>
-						</span>
+						</span> -->
 					</li>
 
 					<li>
-						<a href="category-01.html">News</a>
+						<a href="category-01.html">Giới Thiệu</a>
 					</li>
 
 					<li>
-						<a href="category-02.html">Entertainment </a>
+						<a href="category-02.html">Khóa Học </a>
 					</li>
 
 					<li>
-						<a href="category-01.html">Business</a>
+						<a href="category-01.html">Lịch khai giảng</a>
 					</li>
 
 					<li>
-						<a href="category-02.html">Travel</a>
+						<a href="category-02.html">Sản phẩm</a>
 					</li>
 
 					<li>
-						<a href="category-01.html">Life Style</a>
+						<a href="category-01.html">Thư viện</a>
 					</li>
 
 					<li>
-						<a href="category-02.html">Video</a>
+						<a href="category-02.html">Liên hệ</a>
 					</li>
 
 					<li>
@@ -244,7 +256,7 @@
 
 						<ul class="main-menu">
 							<li class="main-menu-active">
-								<a href="index.html">Home</a>
+								<a href="index.html">Trang chủ</a>
 								<ul class="sub-menu">
 									<li><a href="index.html">Homepage v1</a></li>
 									<li><a href="home-02.html">Homepage v2</a></li>
@@ -253,7 +265,7 @@
 							</li>
 
 							<li class="mega-menu-item">
-								<a href="category-01.html">News</a>
+								<a href="category-01.html">Giới thiệu</a>
 
 								<div class="sub-mega-menu">
 									<div class="nav flex-column nav-pills" role="tablist">
@@ -1038,7 +1050,7 @@
 							</li>
 
 							<li class="mega-menu-item">
-								<a href="category-02.html">Entertainment </a>
+								<a href="category-02.html">Khóa học </a>
 
 								<div class="sub-mega-menu">
 									<div class="nav flex-column nav-pills" role="tablist">
@@ -1436,7 +1448,7 @@
 							</li>
 
 							<li class="mega-menu-item">
-								<a href="category-01.html">Business</a>
+								<a href="category-01.html">Lịch khai giảng</a>
 
 								<div class="sub-mega-menu">
 									<div class="nav flex-column nav-pills" role="tablist">
@@ -1705,7 +1717,7 @@
 							</li>
 
 							<li class="mega-menu-item">
-								<a href="category-02.html">Travel</a>
+								<a href="category-02.html">Sản Phẩm</a>
 
 								<div class="sub-mega-menu">
 									<div class="nav flex-column nav-pills" role="tablist">
@@ -1974,7 +1986,7 @@
 							</li>
 
 							<li class="mega-menu-item">
-								<a href="category-01.html">Life Style</a>
+								<a href="category-01.html">Thư viện</a>
 
 								<div class="sub-mega-menu">
 									<div class="nav flex-column nav-pills" role="tablist">
@@ -2114,7 +2126,7 @@
 							</li>
 
 							<li class="mega-menu-item">
-								<a href="category-02.html">Video</a>
+								<a href="category-02.html">Liên hệ</a>
 
 								<div class="sub-mega-menu">
 									<div class="nav flex-column nav-pills" role="tablist">

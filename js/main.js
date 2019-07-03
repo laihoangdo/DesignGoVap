@@ -264,3 +264,30 @@
             
 
 })(jQuery);
+var app = angular.module('myApp', ['ngRoute']);
+app.config(function($routeProvider) {
+    $routeProvider
+    .when("/", {
+        template: '<h1>This is home</h1>'
+    })
+    .when("/red", {
+        // templateUrl : "blog.html",
+        // controller: "myCtrl"
+        template: '<h1>This is blog</h1>'
+    })
+    .when("/green", {
+        // templateUrl : "blog.html",
+        // controller: "myCtrl"
+        template: '<h1>This is test</h1>'
+    })
+    .when("/blue", {
+        // templateUrl : "blog.html",
+        // controller: "myCtrl"
+        template: '<h1>This is test 22</h1>'
+    });
+});
+app.controller('myCtrl', function($scope) {
+    $scope.init = function(){
+        $scope.menuList = ['About', 'Contact' , 'Sing up', 'Log in'];
+    }
+});
